@@ -3,6 +3,8 @@
 const vscode = require('vscode');
 
 const bat_path = './build.bat';
+
+const qcc_pretty = './QccPretty.exe'
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
@@ -35,7 +37,7 @@ function activate(context) {
          act_term.show(false);
       }
       
-      act_term.sendText(`cmd /c call ${context.asAbsolutePath(bat_path)}`);
+       act_term.sendText(`cmd /c call ${context.asAbsolutePath(bat_path)} 2>&1 | ${context.asAbsolutePath(qcc_pretty)}`);
       // act_term.sendText(`cmd /c call build.bat`, true);
 	});
 
