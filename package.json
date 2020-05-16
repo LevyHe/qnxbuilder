@@ -2,8 +2,8 @@
 	"name": "qnxbuilder",
 	"displayName": "QnxBuilder",
 	"description": "Qnx Builder",
-   "version": "0.0.2",
-   "publisher": "levyhe",
+   "version": "0.0.5",
+   "publisher": "levy",
 	"engines": {
 		"vscode": "^1.41.0"
 	},
@@ -11,7 +11,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.QnxBuild"
+        "onCommand:extension.QnxBuild",
+        "onCommand:extension.QnxReBuild"
 	],
 	"main": "./extension.js",
 	"contributes": {
@@ -19,7 +20,11 @@
 			{
 				"command": "extension.QnxBuild",
 				"title": "Qnx Build"
-			}
+            },
+            {
+                "command": "extension.QnxReBuild",
+                "title": "Qnx ReBuild"
+            }
       ],
       "menus": {
          "explorer/context": [
@@ -27,6 +32,11 @@
                "when": "explorerResourceIsFolder",
                "command": "extension.QnxBuild",
                "group": "2_build"
+            },
+            {
+                "when": "explorerResourceIsFolder",
+                "command": "extension.QnxReBuild",
+                "group": "2_build"
             }
          ]
       }
