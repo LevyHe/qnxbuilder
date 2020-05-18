@@ -44,7 +44,7 @@ function activate(context) {
             act_term.show(false);
         }
 
-        act_term.sendText(`${context.asAbsolutePath(run_cmd)} ${context.asAbsolutePath(bat_path)}`);
+        act_term.sendText(`${context.asAbsolutePath(run_cmd)} ${context.asAbsolutePath(bat_path)} all`);
         // act_term.sendText(`cmd /c call build.bat`, true);
     });
     let disposable2 = vscode.commands.registerCommand('extension.QnxReBuild', function (uri) {
@@ -74,8 +74,64 @@ function activate(context) {
         act_term.sendText(`${context.asAbsolutePath(run_cmd)} ${context.asAbsolutePath(bat_path)} clean`);
         // act_term.sendText(`cmd /c call build.bat`, true);
     });
+    let disposable3 = vscode.commands.registerCommand('extension.GenLdra', function (uri) {
+        // The code you place here will be executed every time your command is executed
+        let act_term = null;
+        let terms = vscode.window.terminals;
+
+        for (let t in terms) {
+            if (terms[t]['creationOptions']['cwd'] == uri.fsPath) {
+                act_term = terms[t];
+                break;
+            };
+        };
+        // Display a message box to the user
+        // vscode.window.showInformationMessage(`当前文件(夹)路径是：${uri ? uri.fsPath : '空'}`);
+        if (act_term) {
+
+            act_term.sendText(`cd "${uri.fsPath}"`, true);
+            act_term.show(false);
+        }
+        else {
+            act_term = vscode.window.createTerminal({ name: 'QnxBuilder', cwd: uri.fsPath });
+            act_term.sendText(`cd "${uri.fsPath}"`, true);
+            act_term.show(false);
+        }
+
+        act_term.sendText(`${context.asAbsolutePath(run_cmd)} ${context.asAbsolutePath(bat_path)} Ldra`);
+        // act_term.sendText(`cmd /c call build.bat`, true);
+    });
+    let disposable4 = vscode.commands.registerCommand('extension.GenUtEnv', function (uri) {
+        // The code you place here will be executed every time your command is executed
+        let act_term = null;
+        let terms = vscode.window.terminals;
+
+        for (let t in terms) {
+            if (terms[t]['creationOptions']['cwd'] == uri.fsPath) {
+                act_term = terms[t];
+                break;
+            };
+        };
+        // Display a message box to the user
+        // vscode.window.showInformationMessage(`当前文件(夹)路径是：${uri ? uri.fsPath : '空'}`);
+        if (act_term) {
+
+            act_term.sendText(`cd "${uri.fsPath}"`, true);
+            act_term.show(false);
+        }
+        else {
+            act_term = vscode.window.createTerminal({ name: 'QnxBuilder', cwd: uri.fsPath });
+            act_term.sendText(`cd "${uri.fsPath}"`, true);
+            act_term.show(false);
+        }
+
+        act_term.sendText(`${context.asAbsolutePath(run_cmd)} ${context.asAbsolutePath(bat_path)} UtEnv`);
+        // act_term.sendText(`cmd /c call build.bat`, true);
+    });
     context.subscriptions.push(disposable);
     context.subscriptions.push(disposable2);
+    context.subscriptions.push(disposable3);
+    context.subscriptions.push(disposable4);
 }
 exports.activate = activate;
 

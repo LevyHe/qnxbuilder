@@ -2,7 +2,7 @@
 	"name": "qnxbuilder",
 	"displayName": "QnxBuilder",
 	"description": "Qnx Builder",
-   "version": "0.0.5",
+   "version": "0.0.6",
    "publisher": "levy",
 	"engines": {
 		"vscode": "^1.41.0"
@@ -12,7 +12,9 @@
 	],
 	"activationEvents": [
         "onCommand:extension.QnxBuild",
-        "onCommand:extension.QnxReBuild"
+        "onCommand:extension.QnxReBuild",
+        "onCommand:extension.GenLdra",
+        "onCommand:extension.GenUtEnv"
 	],
 	"main": "./extension.js",
 	"contributes": {
@@ -24,7 +26,16 @@
             {
                 "command": "extension.QnxReBuild",
                 "title": "Qnx ReBuild"
+            },
+            {
+                "command": "extension.GenLdra",
+                "title": "Qnx GenLdra"
+            },
+            {
+                "command": "extension.GenUtEnv",
+                "title": "Qnx GenUtEnv"
             }
+
       ],
       "menus": {
          "explorer/context": [
@@ -36,6 +47,16 @@
             {
                 "when": "explorerResourceIsFolder",
                 "command": "extension.QnxReBuild",
+                "group": "2_build"
+            },
+            {
+                "when": "explorerResourceIsFolder",
+                "command": "extension.GenLdra",
+                "group": "2_build"
+            },
+            {
+                "when": "explorerResourceIsFolder",
+                "command": "extension.GenUtEnv",
                 "group": "2_build"
             }
          ]
@@ -54,5 +75,9 @@
 		"mocha": "^6.2.2",
 		"typescript": "^3.6.4",
 		"vscode-test": "^1.2.2"
-	}
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LevyHe/qnxbuilder"
+    }
 }
